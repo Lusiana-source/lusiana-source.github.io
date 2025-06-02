@@ -11,6 +11,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\BuyNowController;
 
 // Halaman Utama (Homepage)
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -46,6 +47,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 });
 
+// Halaman Beli sekarang
+Route::post('/buy-now', [BuyNowController::class, 'buyNow'])->name('buy.now');
+Route::get('/checkout/buy-now', [BuyNowController::class, 'showCheckout'])->name('checkout.buy-now');
+Route::post('/checkout/buy-now', [BuyNowController::class, 'processCheckout'])->name('checkout.buy-now.process');
+
+// Halaman Order
 Route::get('/orders/history', [OrderController::class, 'history'])->name('orders.history')->middleware('auth');
 
 Route::post('/cart/{id}', [CartController::class, 'add'])->name('cart.add');

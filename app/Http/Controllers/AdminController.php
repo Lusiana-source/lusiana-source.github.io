@@ -15,11 +15,14 @@ public function index()
     $totalProduk = Product::count();
     $totalPesanan = Order::count();
     $totalPendapatan = Order::sum('total_price');
-    
+
     $pesananTerbaru = Order::latest()->take(5)->get();
     $produkTerbaru = Product::latest()->take(5)->get();
+    
+    // Tambahkan ini
+    $pesananTertunda = Order::where('status', 'pending')->count();
 
-    // Ambil produk terlaris berdasarkan jumlah item terjual
+    // Ambil produk terlaris
     $produkTerlaris = DB::table('order_items')
         ->select('product_id', DB::raw('SUM(quantity) as total_terjual'))
         ->groupBy('product_id')
@@ -43,7 +46,8 @@ public function index()
         'pesananTerbaru',
         'produkTerbaru',
         'produkTerlaris',
-        'stokRendah'
+        'stokRendah',
+        'pesananTertunda' // ← pastikan ini dikirim ke view
     ));
 }
 }

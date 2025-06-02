@@ -65,23 +65,34 @@
             @endif
 
             <!-- Tombol Aksi -->
-            <div class="flex flex-col sm:flex-row sm:items-center gap-4 pt-4">
-                <!-- Tombol kembali -->
+            <div class="space-y-3 pt-6">
+                <!-- Tombol Kembali -->
                 <a href="{{ url('/shop') }}"
-                   class="inline-block px-6 py-2 bg-gray-800 text-white rounded-full hover:bg-gray-900 transition duration-300">
+                   class="w-full block text-center px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-900 transition">
                     ← Kembali ke Daftar Produk
                 </a>
 
-                <!-- Tombol tambah ke keranjang -->
-                <form action="{{ route('cart.add', $product->id) }}" method="POST">
-                    @csrf
-                    <button type="submit"
-                        class="w-full px-6 py-2 rounded-full text-white font-semibold transition 
-                               {{ $product->stock <= 0 ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700' }}"
-                        {{ $product->stock <= 0 ? 'disabled' : '' }}>
-                        + Tambah ke Keranjang
-                    </button>
-                </form>
+                @if ($product->stock > 0)
+                    <!-- Tambah ke Keranjang -->
+                    <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                        @csrf
+                        <button type="submit"
+                            class="w-full px-4 py-2 bg-green-500 text-white rounded-md text-center hover:bg-green-600 transition">
+                            Tambah ke Keranjang
+                        </button>
+                    </form>
+
+                    <!-- Beli Sekarang -->
+                    <form action="{{ route('buy.now') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit"
+                            class="w-full px-4 py-2 bg-yellow-500 text-white rounded-md text-center hover:bg-yellow-600 transition">
+                            Beli Sekarang
+                        </button>
+                    </form>
+                @endif
             </div>
         </div>
     </div>

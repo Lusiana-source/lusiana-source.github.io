@@ -26,7 +26,7 @@
     </div>
     <div class="bg-red-200 p-6 rounded-lg shadow text-center">
         <h2 class="text-sm text-red-900">Pesanan Tertunda</h2>
-        <p class="text-2xl font-bold text-red-900">{{ $pesananTerbaru->where('status', 'pending')->count() }}</p>
+        <p class="text-2xl font-bold text-red-900">{{ $pesananTertunda }}</p>
     </div>
 </div>
 
