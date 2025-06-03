@@ -1,29 +1,25 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app') {{-- Ganti dengan layout utama kamu jika berbeda --}}
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
+@section('content')
+    <div class="max-w-2xl mx-auto py-10 space-y-10">
+        <h1 class="text-2xl font-bold mb-6">Profil Saya</h1>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
+        {{-- Update Profile Information --}}
+        <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-xl font-semibold mb-4">Informasi Pengguna</h2>
+            @include('profile.partials.update-profile-information-form')
+        </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
+        {{-- Update Password --}}
+        <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-xl font-semibold mb-4">Ubah Kata Sandi</h2>
+            @include('profile.partials.update-password-form')
+        </div>
+
+        {{-- Delete User --}}
+        <div class="bg-white p-6 rounded shadow border border-red-500">
+            <h2 class="text-xl font-semibold text-red-600 mb-4">Hapus Akun</h2>
+            @include('profile.partials.delete-user-form')
         </div>
     </div>
-</x-app-layout>
+@endsection

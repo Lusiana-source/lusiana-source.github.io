@@ -70,7 +70,6 @@
                     <option value="">-- Pilih Metode --</option>
                     <option value="cod" {{ old('payment_method') == 'cod' ? 'selected' : '' }}>Bayar di Tempat (COD)</option>
                     <option value="transfer" {{ old('payment_method') == 'transfer' ? 'selected' : '' }}>Transfer Bank</option>
-                    <option value="qris" {{ old('payment_method') == 'qris' ? 'selected' : '' }}>QRIS</option>
                 </select>
 
                 <!-- Info Tambahan Transfer Bank -->
