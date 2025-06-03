@@ -106,7 +106,7 @@
                             <p class="text-gray-700 font-bold mb-4">Rp{{ number_format($product->price, 0, ',', '.') }}</p>
                         @endif
 
-                        <p class="text-sm text-gray-500 mb-2">Stok: {{ $product->stock }}</p>
+                        <!--<p class="text-sm text-gray-500 mb-2">Stok: {{ $product->stock }}</p> -->
 
                         <div class="flex flex-col gap-2 mt-auto">
                             <a href="{{ url('/product/'.$product->id) }}" 

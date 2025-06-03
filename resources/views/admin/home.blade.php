@@ -48,7 +48,7 @@
   </div>
 </section>
 
-<!-- Fitur Unggulan -->
+<!-- Fitur Unggulan 
 <section class="py-16 bg-white text-center">
     <h3 class="text-3xl font-bold mb-10">Kenapa Pilih <span class="text-blue-600">Little Scndh</span>?</h3>
     <div class="flex flex-wrap justify-center gap-10">
@@ -67,7 +67,7 @@
     </div>
 </section>
 
-<!-- Kategori Populer -->
+<!-- Kategori Populer 
 <section class="py-16 bg-gray-100 text-center">
     <h3 class="text-3xl font-bold mb-8">Kategori Populer</h3>
     <div class="flex justify-center flex-wrap gap-4">
@@ -80,7 +80,7 @@
     </div>
 </section>
 
-<!-- Produk Terlaris -->
+<!-- Produk Terlaris 
 <section id="produk" class="py-20 px-6 bg-white">
     <h3 class="text-3xl font-bold text-center mb-12">Produk Terlaris</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
@@ -111,7 +111,7 @@
 </section> -->
 
 
-<!-- Footer -->
+<!-- Footer 
 <footer class="bg-gray-900 text-white py-6">
     <div class="container mx-auto text-center">
         <p class="text-sm mb-2">&copy; 2025 Little Scndh. All rights reserved.</p>
@@ -121,7 +121,7 @@
             <a href="#" class="hover:text-blue-400"><i class="fab fa-tiktok"></i></a>
         </div>
     </div>
-</footer>
+</footer>-->
 
 </body>
 </html>
