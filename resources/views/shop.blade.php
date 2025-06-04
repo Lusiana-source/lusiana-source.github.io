@@ -122,14 +122,22 @@
                             </form>
 
                                 {{-- Form Beli Sekarang --}}
-                            <form action="{{ route('buy.now') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 transition">
-                                    Beli Sekarang
-                                </button>
-                            </form>
+                           @auth
+    <form action="{{ route('buy.now') }}" method="POST">
+        @csrf
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" class="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 transition">
+            Beli Sekarang
+        </button>
+    </form>
+@else
+    <a href="{{ route('login') }}"
+       class="w-full block bg-yellow-500 text-white text-center py-2 rounded hover:bg-yellow-600 transition">
+        Beli Sekarang
+    </a>
+@endauth
+
                         </div>
                     </div>
                 </div>

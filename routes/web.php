@@ -48,7 +48,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Halaman Beli sekarang
-Route::post('/buy-now', [BuyNowController::class, 'buyNow'])->name('buy.now');
+Route::post('/buy-now', [BuyNowController::class, 'store'])
+    ->middleware('auth') // Penting agar tidak bisa diakses tanpa login
+    ->name('buy.now');
 Route::get('/checkout/buy-now', [BuyNowController::class, 'showCheckout'])->name('checkout.buy-now');
 Route::post('/checkout/buy-now', [BuyNowController::class, 'processCheckout'])->name('checkout.buy-now.process');
 

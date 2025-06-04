@@ -33,10 +33,18 @@
       <p class="text-lg text-gray-700 mb-6">
         Dapatkan fashion berkualitas dengan harga terbaik untuk kamu yang tampil beda.
       </p>
-      <a href="{{ route('shop') }}"
-         class="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition duration-300">
-        Belanja Sekarang
-      </a>
+@auth
+    <a href="{{ route('shop') }}"
+       class="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition duration-300">
+       Belanja Sekarang
+    </a>
+@else
+    <a href="{{ route('login') }}"
+       class="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition duration-300">
+       Belanja Sekarang
+    </a>
+@endauth
+
     </div>
     <!-- Gambar Produk -->
     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 md:w-1/2">
