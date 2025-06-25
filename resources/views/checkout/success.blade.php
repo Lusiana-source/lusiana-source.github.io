@@ -23,6 +23,16 @@
            class="w-full mt-2 bg-gray-800 text-white font-medium text-sm px-4 py-2 rounded-lg hover:bg-gray-900 transition duration-200 flex items-center justify-center gap-2">
             ← Kembali ke Beranda
         </a>
+        
+@if ($order && $order->payment_method === 'transfer' && !$order->payment_proof)
+    <div class="mt-6 text-center">
+        <p class="text-gray-700 mb-2">Silakan upload bukti transfer untuk menyelesaikan pesanan.</p>
+        <a href="{{ route('checkout.uploadProof.form', $order->id) }}"
+            class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            Upload Bukti Pembayaran
+        </a>
+    </div>
+@endif
     </div>
 </div>
 @endsection

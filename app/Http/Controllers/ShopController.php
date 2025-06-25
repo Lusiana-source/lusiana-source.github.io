@@ -9,21 +9,22 @@ use App\Http\Controllers\Controller;
 
 class ShopController extends Controller
 {
-    public function index(Request $request)
-    {
-        $products = Product::query()
-            ->when($request->search, function($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->search . '%');
-            })
-            ->when($request->category, function($query) use ($request) {
-                $query->where('category_id', $request->category);
-            })
-            ->paginate(12); // Tampilkan 12 produk per halaman
+public function index(Request $request)
+{
 
-        $categories = Category::all();
+    $products = Product::with('category')
+        ->when($request->search, function($query) use ($request) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        })
+        ->when($request->category, function($query) use ($request) {
+            $query->where('category_id', $request->category);
+        })
+        ->paginate(12); // Tampilkan 12 produk per halaman
 
-        return view('shop', compact('products', 'categories'));
-    }
+    $categories = Category::all();
+
+    return view('shop', compact('products', 'categories'));
+}
 
     public function show($id)
     {

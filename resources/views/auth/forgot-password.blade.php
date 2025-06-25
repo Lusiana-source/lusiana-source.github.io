@@ -1,25 +1,55 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-    </div>
+@extends('layouts.app')
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@section('title', 'Lupa Password')
 
-    <form method="POST" action="{{ route('password.email') }}">
+@section('content')
+<div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-xl font-bold text-gray-800 mb-4 text-center">Ubah Kata Sandi</h2>
+
+    {{-- Notifikasi sukses --}}
+    @if(session('status') === 'password-updated')
+        <div class="bg-green-100 text-green-800 px-4 py-2 rounded mb-4 text-sm">
+            Kata sandi berhasil diperbarui!
+        </div>
+    @endif
+
+    <form method="POST" action="{{ route('password.update') }}" class="space-y-5">
         @csrf
+        @method('PUT')
 
-        <!-- Email Address -->
+        {{-- Password Saat Ini --}}
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <label class="block text-sm font-medium text-gray-700 mb-1">Kata Sandi Saat Ini</label>
+            <input type="password" name="current_password" autocomplete="current-password" required
+                class="w-full border border-gray-300 rounded px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            @error('current_password')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
+        {{-- Password Baru --}}
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Kata Sandi Baru</label>
+            <input type="password" name="password" autocomplete="new-password" required
+                class="w-full border border-gray-300 rounded px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            @error('password')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
         </div>
+
+        {{-- Konfirmasi Password --}}
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Konfirmasi Kata Sandi Baru</label>
+            <input type="password" name="password_confirmation" autocomplete="new-password" required
+                class="w-full border border-gray-300 rounded px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <button type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-300 shadow">
+            Simpan Perubahan
+        </button>
     </form>
-</x-guest-layout>
+</div>
+
+</div>
+@endsection

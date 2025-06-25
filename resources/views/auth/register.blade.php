@@ -16,7 +16,7 @@
 
     <div class="bg-white p-8 sm:p-10 rounded-3xl shadow-2xl w-full max-w-md border border-blue-200">
         <div class="text-center mb-6">
-            <img src="{{ asset('storage/products/Logo.png') }}"
+            <img src="{{ asset('storage/products/logo1.jpg') }}"
                  alt="Little Scndh Logo"
                  class="w-20 h-20 mx-auto mb-4 rounded-full shadow-lg border-4 border-white hover:shadow-xl transition duration-300 ease-in-out">
             <h2 class="text-2xl font-bold text-gray-800">Buat Akun Baru</h2>

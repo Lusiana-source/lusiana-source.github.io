@@ -22,19 +22,16 @@
     </div>
 
     <!-- Form Pencarian & Filter Kategori -->
-    <form action="{{ url('/shop') }}" method="GET" class="max-w-7xl mx-auto px-6 py-6 mb-6 flex flex-col md:flex-row justify-between items-center gap-4 bg-white shadow rounded-lg mt-6">
+    <form action="{{ url('/shop') }}" method="GET" class="max-w-7xl mx-auto px-6 py-6 mb-2 flex flex-col md:flex-row justify-between items-center gap-4 bg-white shadow rounded-lg mt-6">
         <input 
             type="text" 
             name="search" 
-            placeholder="Cari produk..." 
+            placeholder="Cari produk berdasarkan nama..." 
             value="{{ request('search') }}"
             class="border border-gray-300 rounded-lg p-3 w-full md:w-2/3 focus:outline-none focus:ring focus:border-blue-500"
         >
 
-        <select 
-            name="category" 
-            class="border border-gray-300 rounded-lg p-3 w-full md:w-1/3 focus:outline-none focus:ring focus:border-blue-500"
-        >
+            <select name="category" onchange="this.form.submit()" class="border border-gray-300 rounded-lg p-3 w-full md:w-1/3 focus:outline-none focus:ring focus:border-blue-500">
             <option value="">Semua Kategori</option>
             @foreach($categories as $category)
                 <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
@@ -42,7 +39,19 @@
                 </option>
             @endforeach
         </select>
+
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+            Cari
+        </button>
     </form>
+
+    @if(request('search') || request('category'))
+    <div class="max-w-7xl mx-auto px-6 mb-6 -mt-3 text-right">
+        <a href="{{ url('/shop') }}" class="text-sm text-blue-600 hover:underline">
+            Reset Filter
+        </a>
+    </div>
+    @endif
 
     <!-- Tombol Checkout -->
     @php $cart = session('cart', []); @endphp
@@ -59,23 +68,37 @@
 
     <!-- Konten Utama -->
     <main class="max-w-7xl mx-auto px-6 py-8">
-        <h2 class="text-2xl font-bold mb-8 text-center">Shop</h2>
 
-            {{-- Tampilkan Pesan Success atau Error --}}
-    @if(session('error'))
-        <div class="bg-red-100 border border-red-300 text-red-800 px-4 py-3 rounded mb-6 text-center">
-            {{ session('error') }}
-        </div>
-    @endif
 
-    @if(session('success'))
-        <div class="bg-green-100 border border-green-300 text-green-800 px-4 py-3 rounded mb-6 text-center">
-            {{ session('success') }}
-        </div>
-    @endif
+        @if(session('error'))
+            <div class="bg-red-100 border border-red-300 text-red-800 px-4 py-3 rounded mb-6 text-center">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @if(session('success'))
+            <div class="bg-green-100 border border-green-300 text-green-800 px-4 py-3 rounded mb-6 text-center">
+                {{ session('success') }}
+            </div>
+        @endif
 
         @if($products->isEmpty())
-            <p class="text-center text-gray-500">Produk tidak ditemukan.</p>
+            <div class="text-center text-gray-500 mt-8">
+                <p class="mb-2">Produk tidak ditemukan.</p>
+                @if(request('search') || request('category'))
+                    <p class="text-sm">
+                        @if(request('search'))
+                            Kata kunci: <strong>"{{ request('search') }}"</strong>
+                        @endif
+                        @if(request('search') && request('category')) | @endif
+                        @if(request('category'))
+                            Kategori: <strong>
+                                {{ $categories->find(request('category'))?->name ?? 'Tidak Dikenal' }}
+                            </strong>
+                        @endif
+                    </p>
+                @endif
+            </div>
         @else
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 @foreach($products as $product)
@@ -106,7 +129,6 @@
                             <p class="text-gray-700 font-bold mb-4">Rp{{ number_format($product->price, 0, ',', '.') }}</p>
                         @endif
 
-                        <!--<p class="text-sm text-gray-500 mb-2">Stok: {{ $product->stock }}</p> -->
 
                         <div class="flex flex-col gap-2 mt-auto">
                             <a href="{{ url('/product/'.$product->id) }}" 
@@ -121,23 +143,21 @@
                                 </button>
                             </form>
 
-                                {{-- Form Beli Sekarang --}}
-                           @auth
-    <form action="{{ route('buy.now') }}" method="POST">
-        @csrf
-        <input type="hidden" name="product_id" value="{{ $product->id }}">
-        <input type="hidden" name="quantity" value="1">
-        <button type="submit" class="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 transition">
-            Beli Sekarang
-        </button>
-    </form>
-@else
-    <a href="{{ route('login') }}"
-       class="w-full block bg-yellow-500 text-white text-center py-2 rounded hover:bg-yellow-600 transition">
-        Beli Sekarang
-    </a>
-@endauth
-
+                            @auth
+                                <form action="{{ route('buy.now') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 transition">
+                                        Beli Sekarang
+                                    </button>
+                                </form>
+                            @else
+                                <a href="{{ route('login') }}"
+                                   class="w-full block bg-yellow-500 text-white text-center py-2 rounded hover:bg-yellow-600 transition">
+                                    Beli Sekarang
+                                </a>
+                            @endauth
                         </div>
                     </div>
                 </div>
@@ -150,16 +170,6 @@
             </div>
         @endif
     </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white text-center py-8 mt-10">
-        <p class="mb-3 text-sm">&copy; 2025 Little Scndh. All rights reserved.</p>
-        <div class="flex justify-center space-x-6 text-xl">
-            <a href="#" class="hover:text-pink-400"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="hover:text-green-400"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" class="hover:text-red-400"><i class="fab fa-tiktok"></i></a>
-        </div>
-    </footer>
 
 </body>
 </html>

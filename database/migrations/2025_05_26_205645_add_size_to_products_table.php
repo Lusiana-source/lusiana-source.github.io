@@ -6,18 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    public function up()
+    {
+        if (!Schema::hasColumn('products', 'size')) {
+            Schema::table('products', function (Blueprint $table) {
+                $table->string('size')->nullable();
+            });
+        }
+    }
 
-public function up()
-{
-    Schema::table('products', function (Blueprint $table) {
-        $table->string('size')->nullable(); // untuk tambahkan kolom size
-    });
-}
-
-public function down()
-{
-    Schema::table('products', function (Blueprint $table) {
-        $table->dropColumn('size');
-    });
-}
+    public function down()
+    {
+        if (Schema::hasColumn('products', 'size')) {
+            Schema::table('products', function (Blueprint $table) {
+                $table->dropColumn('size');
+            });
+        }
+    }
 };

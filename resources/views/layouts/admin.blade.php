@@ -29,6 +29,11 @@
                     Kelola Produk
                 </a>
             </li>
+             <li>
+                <a href="{{ url('/admin/orders') }}" class="block px-4 py-2 rounded hover:bg-gray-700 transition">
+                    Data Pesanan
+                </a>
+            </li>
         </ul>
     </nav>
     <div>

@@ -18,7 +18,6 @@
     <ul class="hidden md:flex space-x-6 font-medium">
         <li><a href="{{ route('admin.home') }}" class="hover:text-blue-600">Home</a></li>
         <li><a href="{{ route('shop') }}" class="hover:text-blue-600">Shop</a></li>
-        <li><a href="{{ route('about') }}" class="hover:text-blue-600">About</a></li>
         <li><a href="{{ route('contact') }}" class="hover:text-blue-600">Contact</a></li>
     </ul>
 </nav>

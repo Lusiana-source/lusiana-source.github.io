@@ -48,14 +48,11 @@ public function index(Request $request)
         return view('shop', compact('products', 'categories'));
     }
     
-    
-
-    public function about()
-    {
-    return view('about');
-    }
-
-    public function contact()
+   // public function about() 
+   // {
+   // return view('about');
+   // }
+   public function contact()
     {
         return view('contact');
     }

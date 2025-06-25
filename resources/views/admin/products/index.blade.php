@@ -54,10 +54,10 @@
                         </td>
                         <td class="px-4 py-2 border-b">
                             <div class="flex flex-wrap justify-center items-center gap-2">
-                                <a href="{{ route('products.show', $product->id) }}"
+                               <!-- <a href="{{ route('products.show', $product->id) }}" 
                                     class="bg-blue-500 text-white px-3 py-1 rounded text-xs hover:bg-blue-600">
                                     Detail
-                                </a>
+                                </a>-->
                                 <a href="{{ route('products.edit', $product->id) }}"
                                     class="bg-yellow-500 text-white px-3 py-1 rounded text-xs hover:bg-yellow-600">
                                     Edit

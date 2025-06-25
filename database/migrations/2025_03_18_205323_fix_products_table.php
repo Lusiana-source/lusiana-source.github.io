@@ -6,22 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('category'); // Hapus kolom kategori yang salah
-            $table->foreignId('category_id')->nullable()->change(); // Pastikan category_id bisa NULL
+            // Hapus kolom 'category' jika ada (harus hati-hati, pastikan sudah backup data)
+            if (Schema::hasColumn('products', 'category')) {
+                $table->dropColumn('category');
+            }
+
+            // Ubah kolom category_id jadi nullable
+            $table->unsignedBigInteger('category_id')->nullable()->change();
         });
     }
-    
+
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('category'); // Tambahkan kembali jika rollback
-            $table->foreignId('category_id')->change();
+            $table->string('category')->nullable(); // Kembalikan kolom kategori (jika rollback)
+            $table->unsignedBigInteger('category_id')->nullable(false)->change();
         });
-    }    
+    }
 };

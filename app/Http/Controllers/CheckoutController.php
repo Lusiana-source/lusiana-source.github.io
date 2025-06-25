@@ -66,6 +66,8 @@ class CheckoutController extends Controller
             'payment_method' => $request->payment_method,
             'status' => 'pending',
         ]);
+        logger($request->all());
+
 
         // Simpan item order
         foreach ($cart as $productId => $item) {
@@ -98,6 +100,42 @@ class CheckoutController extends Controller
 
     public function success()
     {
-        return view('checkout.success');
+    $order = Order::where('user_id', auth()->id())
+                  ->latest()
+                  ->first();
+
+    return view('checkout.success', compact('order'));
     }
+
+   public function showUploadProofForm(Order $order)
+{
+    // Pastikan hanya user yang punya pesanan bisa akses
+    if ($order->user_id !== auth()->id()) {
+        abort(403);
+    }
+
+    return view('checkout.upload-proof', compact('order'));
+}
+
+public function uploadPaymentProof(Request $request, Order $order)
+{
+    if ($order->user_id !== auth()->id()) {
+        abort(403);
+    }
+
+    $request->validate([
+        'payment_proof' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+    ]);
+
+    $path = $request->file('payment_proof')->store('payment_proofs', 'public');
+
+    $order->update([
+        'payment_proof' => $path,
+        'status' => 'Menunggu Konfirmasi',
+    ]);
+
+    return redirect()->route('orders.history')->with('success', 'Bukti pembayaran berhasil diupload.');
+}
+ 
+
 }

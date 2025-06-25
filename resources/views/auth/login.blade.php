@@ -18,12 +18,19 @@
     <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl">
         <!-- Logo & Heading -->
       <div class="text-center mb-6">
-    <img src="{{ asset('storage/products/Logo.png') }}" 
+    <img src="{{ asset('storage/products/logo1.jpg') }}" 
          alt="Little Scndh Logo" 
          class="w-20 h-20 mx-auto mb-4 rounded-full shadow-lg border-4 border-white hover:shadow-xl transition duration-300">
     <h2 class="text-2xl font-bold text-gray-800">Login ke <span class="text-blue-600">Little Scndh</span></h2>
     <p class="text-sm text-gray-500">Masuk untuk mulai berbelanja!</p>
 </div>
+
+        <!-- Peringatan jika gagal login -->
+        @if(session('errors'))
+            <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded text-sm">
+                <strong>Oops!</strong> Email atau password salah.
+            </div>
+        @endif
 
 
         <!-- Form Login -->

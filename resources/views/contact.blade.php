@@ -15,12 +15,33 @@
     </header>
 
     <!-- Konten Utama -->
-    <main class="max-w-7xl mx-auto px-6 py-12">
-        
+    <main class="max-w-4xl mx-auto px-6 py-12">
+
+        <!-- Informasi Kontak -->
+        <div class="grid md:grid-cols-3 gap-6 mb-12 text-center">
+            <div>
+                <i class="fas fa-envelope text-blue-600 text-2xl mb-2"></i>
+                <h2 class="text-lg font-semibold">Email</h2>
+                <p class="text-gray-700">littlescndh@gmail.com</p>
+            </div>
+            <div>
+                <i class="fab fa-whatsapp text-green-500 text-2xl mb-2"></i>
+                <h2 class="text-lg font-semibold">WhatsApp</h2>
+                <p class="text-gray-700">+62 812-3456-7890</p>
+            </div>
+            <div>
+                <i class="fas fa-map-marker-alt text-red-500 text-2xl mb-2"></i>
+                <h2 class="text-lg font-semibold">Alamat</h2>
+                <p class="text-gray-700">Lapandan, Tana Toraja</p>
+            </div>
+        </div>
+
+        <!-- Deskripsi -->
         <p class="text-gray-700 text-lg text-center max-w-2xl mx-auto mb-8">
             Jika Anda memiliki pertanyaan atau ingin bekerja sama, jangan ragu untuk menghubungi kami melalui formulir di bawah ini.
         </p>
 
+        <!-- Form -->
         <div class="w-full max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
             @if(session('success'))
                 <div class="mb-4 p-4 bg-green-100 text-green-700 rounded">
@@ -68,29 +89,16 @@
                 </button>
             </form>
 
-            
-        <div class="mt-4 text-center">
-    <a href="{{ route('home') }}"
-       class="inline-flex items-center gap-2 text-sm text-blue-600 hover:underline hover:text-blue-800 transition">
-        <i class="fas fa-arrow-left"></i>
-        <span>Kembali ke Home</span>
-    </a>
-</div>
-
+            <!-- Tombol kembali -->
+            <div class="mt-4 text-center">
+                <a href="{{ route('home') }}"
+                   class="inline-flex items-center gap-2 text-sm text-blue-600 hover:underline hover:text-blue-800 transition">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Kembali ke Home</span>
+                </a>
+            </div>
         </div>
     </main>
-
-<!-- Footer -->
-<footer class="bg-gray-900 text-white py-6">
-    <div class="container mx-auto text-center">
-        <p class="text-sm mb-2">&copy; 2025 Little Scndh. All rights reserved.</p>
-        <div class="flex justify-center gap-6 mt-2 text-xl">
-            <a href="#" class="hover:text-blue-400"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="hover:text-blue-400"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" class="hover:text-blue-400"><i class="fab fa-tiktok"></i></a>
-        </div>
-    </div>
-</footer>
 
 </body>
 </html>

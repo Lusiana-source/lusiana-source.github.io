@@ -18,6 +18,9 @@ protected $fillable = [
     'total_price',
     'payment_method',
     'status',
+    'payment_proof',
+    'no_resi',
+   
 ];
 
     // Relasi ke User (jika ada)
